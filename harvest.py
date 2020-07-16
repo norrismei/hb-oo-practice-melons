@@ -109,35 +109,37 @@ class Melon(object):
     # Needs __init__ and is_sellable methods
 
 def make_melons(melon_types):
-    """Returns a list of Melon objects."""
+    """Takes in list of MelonType objects, eturns a list of Melon objects."""
+
+    melon_type_by_code = make_melon_type_lookup(melon_types)
 
     melons = []
 
-    melon_1 = Melon(melon_types['yw'], 8, 7, 2, 'Sheila')
+    melon_1 = Melon(melon_type_by_code['yw'], 8, 7, 2, 'Sheila')
     melons.append(melon_1)
 
-    melon_2 = Melon(melon_types['yw'], 3, 4, 2, 'Sheila')
+    melon_2 = Melon(melon_type_by_code['yw'], 3, 4, 2, 'Sheila')
     melons.append(melon_2)
 
-    melon_3 = Melon(melon_types['yw'], 9, 8, 3, 'Sheila')
+    melon_3 = Melon(melon_type_by_code['yw'], 9, 8, 3, 'Sheila')
     melons.append(melon_3)
 
-    melon_4 = Melon(melon_types['cas'], 10, 6, 35, 'Sheila')
+    melon_4 = Melon(melon_type_by_code['cas'], 10, 6, 35, 'Sheila')
     melons.append(melon_4)
 
-    melon_5 = Melon(melon_types['cren'], 8, 9, 35, 'Michael')
+    melon_5 = Melon(melon_type_by_code['cren'], 8, 9, 35, 'Michael')
     melons.append(melon_5)
 
-    melon_6 = Melon(melon_types['cren'], 8, 2, 35, 'Michael')
+    melon_6 = Melon(melon_type_by_code['cren'], 8, 2, 35, 'Michael')
     melons.append(melon_6)
 
-    melon_7 = Melon(melon_types['cren'], 2, 3, 4, 'Michael')
+    melon_7 = Melon(melon_type_by_code['cren'], 2, 3, 4, 'Michael')
     melons.append(melon_7)
 
-    melon_8 = Melon(melon_types['musk'], 6, 7, 4, 'Michael')
+    melon_8 = Melon(melon_type_by_code['musk'], 6, 7, 4, 'Michael')
     melons.append(melon_8)
 
-    melon_9 = Melon(melon_types['yw'], 7, 10, 3, 'Sheila')
+    melon_9 = Melon(melon_type_by_code['yw'], 7, 10, 3, 'Sheila')
     melons.append(melon_9)
 
     return melons
@@ -157,7 +159,6 @@ def get_sellability_report(melons):
 
 # Functions to test script
 melon_types = make_melon_types()
-melon_dict = make_melon_type_lookup(melon_types)
-melons = make_melons(melon_dict)
+melons = make_melons(melon_types)
 get_sellability_report(melons)
 
