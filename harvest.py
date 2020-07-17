@@ -98,8 +98,8 @@ class Melon(object):
 
     def is_sellable(self):
         """Returns True if melon is sellable; False otherwise"""
-        if self.shape_rating >= 5 and \
-            self.color_rating >= 5 and \
+        if self.shape_rating > 5 and \
+            self.color_rating > 5 and \
             self.from_field != 3:
             return True
         else:
@@ -108,7 +108,7 @@ class Melon(object):
 
     # Needs __init__ and is_sellable methods
 
-def make_melons(melon_types):
+def make_melons(melon_types, melon_data=[]):
     """Takes in list of MelonType objects, eturns a list of Melon objects."""
 
     melon_type_by_code = make_melon_type_lookup(melon_types)
@@ -142,6 +142,16 @@ def make_melons(melon_types):
     melon_9 = Melon(melon_type_by_code['yw'], 7, 10, 3, 'Sheila')
     melons.append(melon_9)
 
+    for melon in melon_data:
+        code = melon[5]
+        shape_rating = int(melon[1])
+        color_rating = int(melon[3])
+        from_field = int(melon[11])
+        harvested_by = melon[8]
+        melon_object = Melon(melon_type_by_code[code], shape_rating, color_rating, \
+                    from_field, harvested_by)
+        melons.append(melon_object)
+
     return melons
 
 
@@ -157,8 +167,24 @@ def get_sellability_report(melons):
             str(melon.from_field) + " " + is_sellable_msg)
 
 
+def open_and_close_file(filepath):
+    """Opens file and returns list of harvests"""
+
+    file = open('harvest_log.txt')
+
+    harvests = []
+
+    for line in file:
+        line = line.rstrip()
+        tokens = line.split()
+        harvests.append(tokens)
+
+    return harvests
+
+
 # Functions to test script
+file = 'harvest_log.txt'
 melon_types = make_melon_types()
-melons = make_melons(melon_types)
+melons = make_melons(melon_types, open_and_close_file(file))
 get_sellability_report(melons)
 
